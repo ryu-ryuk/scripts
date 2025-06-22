@@ -59,7 +59,10 @@ sudo mv "$BIN_NAME" /usr/local/bin/
 
 # === optional ephemeral run ===
 prompt "Run 'porterm' once and delete it after? (y/N): "
-read choice
+if ! read -r choice </dev/tty; then
+  choice="n"
+fi
+
 if [[ "$choice" =~ ^[Yy]$ ]]; then
   info "Running once..."
   porterm
